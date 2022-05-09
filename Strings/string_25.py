@@ -5,20 +5,22 @@ Txt1="Ingrese una expresión algebraica: "
 
 A=input(Txt1)
 B=list(A)
+C=list(A)
 N=[]
 
 p=0
+d=0
 n_i=A[0]
 
-for n in B:
+for n in C:
     
-    if n_i.isdigit() and not n.isdigit() and not n in ")/^+-":
-        B.insert(p,"*")
-    
+    if not n.isdigit() and not n in "*()/^+-" and n_i not in "*(/^+-" or n.isdigit() and n_i==")":
+        B.insert(p+d,"*")
+        d+=1
+
     n_i=n
     p+=1
 
 C="".join(B)
-print(C)
 C.replace("^","**")
-print(eval(C))
+print(C)
