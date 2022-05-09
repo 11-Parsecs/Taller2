@@ -24,4 +24,3 @@ for i in "abcdefghijklmnopqrstuvwxyz":
     Loop3.append(i*n)
     
 print(Loop3)
-
