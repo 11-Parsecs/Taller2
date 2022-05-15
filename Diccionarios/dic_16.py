@@ -1,4 +1,4 @@
-Txt="Ingrese un número {}{}: "
+Txt="Ingrese un número {}{} menor que 4000: "
 Txt1="Eso no es un número {}."
 Txt2="romano"
 Txt3="arábigo"
@@ -27,39 +27,32 @@ def Rom2Ara(Rom):
     >>> 44
     """
 
-    Ara=0
-
     Inv=Rom[::-1]
 
-    n_i1=0
+    Ara=int(Roman[Inv[0]])
 
-    for i in Inv:
+    for i,i1 in zip(Inv[1:],Inv[:len(Inv)]):
         n_i=eval(Roman[i])
+        n_i1=eval(Roman[i1])
         if n_i1>n_i:
             if n_i in [5,50,500]:
                 Ara=Txt4
                 break
-            elif n_i1/10 != n_i:
-                if n_i1==5 and n_i==1:
-                    Ara-=1
-                else:
-                    Ara=Txt4
-                    break
+            elif n_i1/10 != n_i and n_i1/5 != n_i:
+                Ara=Txt4
+                break
             else:
                 Ara-=n_i
         else:
             Ara+=n_i
-        n_i1=n_i
     return Ara
-"""
-In1=input(Txt.format(Txt2,Txt5))
 
+In1=input(Txt.format(Txt2,Txt5))
 try:
     Out1=Rom2Ara(In1)
     print(Out1)
 except:
     print(Txt1.format(Txt2))
-"""
 
 ##############
 #b)
@@ -82,26 +75,42 @@ def Ara2Rom(Ara):
     """
 
     Rom=[]
+    Arab={}
     Ara=int(Ara)
 
     for i,j in Roman.items():
 
         j=int(j)
+        Arab[j]=i
         while Ara//j!=0:
             Ara-=j
             Rom.append(i)
 
-    return "".join(Rom)
+    try:
+        n=3
+        for i,i1,i2,i3 in zip(Rom[3:],Rom[2:len(Rom)],Rom[1:len(Rom)-1],Rom[:len(Rom)-2]): #IIII #XXXX #CCCC #MMMM
+            if i==i1 and i1==i2 and i2==i3:
+                Rom.insert(n+1,Arab[int(Roman[i])*5])
+                del Rom[n-2:n+1]
+                n-=2
+            n+=1
+    finally:
+        try:
+            n=2
+            for i,i1,i2 in zip(Rom[2:],Rom[1:len(Rom)],Rom[:len(Rom)-1]): #VIV #LXL #DCD
+                if i==i2 and int(Roman[i1])==int(Roman[i])/5:
+                    Rom.insert(n,Arab[int(Roman[i])*2])
+                    del Rom[n+1:n+2]
+                    del Rom[n-2:n-1]
+                    n-=1
+                n+=1
+        finally:
+            return "".join(Rom)
 
 In2=input(Txt.format(Txt3,""))
 
-Out2=Ara2Rom(In2)
-print(Out2)
-
-'''
 try:
     Out2=Rom2Ara(In2)
     print(Out2)
 except:
     print(Txt1.format(Txt3))
-'''
