@@ -1,3 +1,7 @@
+##########################
+#Escriba un programa que genere 26 strings con el abecedario, pero en cada uno que empiece por la siguiente letra del mismo
+##########################
+
 Str="abcdefghijklomnopqrstuvwxyz"
 
 for p in Str:

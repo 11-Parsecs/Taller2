@@ -1,3 +1,11 @@
+##########################
+#Hay un método de cifrado llamado one-time pad. Este mueve cada letra de un texto en una cantidad
+#entre 1 y 26 en el abecedario, el conjunto de números con el que se movió cada letra se llama clave.
+
+#(a)Escriba un programa que permita al usuario encriptar un mensaje utilizando el método one-time pad con una clave aleatoria.
+#(b)Escriba un programa desencripte el mensaje que imprime el punto (a).
+##########################
+
 from random import randint
 
 Txt="Ingrese un mensaje: "
@@ -6,7 +14,7 @@ Alpha={}
 Pos_Alpha={}
 p=0
 
-for i in "abcdefghijklmnopqrstuvwxyz":
+for i in "abcdefghijklmnopqrstuvwxyz": #Asigna cada letra del abecedarioa un número en un diccionario
     Alpha[p]=i
     Pos_Alpha[i]=p
     p+=1
@@ -34,9 +42,9 @@ def Encrypt(N):
 
     for i in N:
         try:
-            a=randint(1,26)
+            a=randint(1,26) #Crea la clave aleatoria
             Clave.append(a)
-            m=(Pos_Alpha[i]+a)%25
+            m=(Pos_Alpha[i]+a)%25 #Mueve la letra según la clave
             N_Enc.append(Alpha[m])
         except:
             Clave.pop()
@@ -74,7 +82,7 @@ def Decrypt(N_Enc,Clave):
 
     for i in N_Enc:
         try:
-            m=(Pos_Alpha[i]-Clave[q])%25
+            m=(Pos_Alpha[i]-Clave[q])%25 #Mueve los números en reversa según la clave dada
             N.append(Alpha[m])
             q+=1
         except:
@@ -90,4 +98,4 @@ N=input(Txt)
 a=Encrypt(N)
 
 N_Enc=input(Txt)
-b=Decrypt(N_Enc,a[1])
+b=Decrypt(N_Enc,a[1]) #La clave ingresada es la misma que la generada aleatoriamente en la función Encrypt
