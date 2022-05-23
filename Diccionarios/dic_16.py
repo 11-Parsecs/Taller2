@@ -115,7 +115,7 @@ def Ara2Rom(Ara):
 In2=input(Txt.format(Txt3,""))
 
 try:
-    Out2=Rom2Ara(In2)
+    Out2=Ara2Rom(In2)
     print(Out2)
 except:
     print(Txt1.format(Txt3))
